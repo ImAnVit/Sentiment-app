@@ -7,9 +7,9 @@ A web app that analyzes the sentiment of user-input text using a pre-trained NLP
 - Deployed on [Streamlit Cloud/Render].
 
 ## Setup
-1. Clone the repo: `git clone <repo-url>`
+1. Clone the repo: `git clone <https://github.com/ImAnVit/Sentiment-app.git>`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run locally: `streamlit run app.py`
 
 ## Demo
-[Link to deployed app](https://github.com/ImAnVit/sentiment-app.git)
+[Link to deployed app](https://sentiment-app-fpmn6grerxwvuk3lv7kuhd.streamlit.app/)
