@@ -13,6 +13,24 @@ st.markdown("Analyze the sentiment of your text (e.g., movie reviews, tweets).")
 # Text input
 user_input = st.text_area("Input Text", placeholder="Type your text here...", height=150)
 
+# File upload
+st.subheader("Batch Analysis")
+uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
+if uploaded_file:
+    df = pd.read_csv(uploaded_file)
+    if "text" in df.columns:
+        results = []
+        for text in df["text"]:
+            result = analyze_sentiment(str(text)[:512])
+            results.append(result)
+        df_results = pd.DataFrame(results)
+        st.write("Batch Analysis Results")
+        st.dataframe(df_results[["text", "label", "score"]])
+        # Save results to history
+        st.session_state.history.extend(results)
+    else:
+        st.error("CSV must have a 'text' column.")
+
 # Analyze button
 if st.button("Analyze Sentiment"):
     if user_input.strip():
