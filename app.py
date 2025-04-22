@@ -1,5 +1,7 @@
 import streamlit as st
 from sentiment_analyzer import analyze_sentiment
+import plotly.express as px
+import pandas as pd
 
 # Initialize session state for history
 if "history" not in st.session_state:
@@ -41,3 +43,14 @@ if st.session_state.history:
     for i, entry in enumerate(st.session_state.history):
         st.write(f"**Entry {i+1}**: {entry['text']}...")
         st.write(f"Sentiment: {entry['label']}, Confidence: {entry['score']:.3f}")
+
+    # Create pie chart
+    df = pd.DataFrame(st.session_state.history)
+    sentiment_counts = df["label"].value_counts().reset_index()
+    sentiment_counts.columns = ["Sentiment", "Count"]
+    fig = px.pie(sentiment_counts, names="Sentiment", values="Count", title="Sentiment Distribution")
+    st.plotly_chart(fig)
+    
+    # Create bar chart
+    fig_bar = px.bar(df, x=df.index, y="score", color="label", title="Confidence Scores")
+    st.plotly_chart(fig_bar)
