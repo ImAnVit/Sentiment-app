@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import random
 import re
