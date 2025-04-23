@@ -1,12 +1,22 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import random
 import re
 
 # Set page title and configuration
 st.set_page_config(page_title="Movie Chat & Sentiment App", layout="wide")
+
+# Download NLTK data if not already available
+try:
+    nltk.data.find('sentiment/vader_lexicon')
+    st.success("✅ NLTK vader_lexicon found!")
+except LookupError:
+    st.info("Downloading NLTK vader_lexicon...")
+    nltk.download('vader_lexicon')
+    st.success("✅ NLTK vader_lexicon downloaded successfully!")
 
 # Initialize sentiment analysis with VADER
 try:
